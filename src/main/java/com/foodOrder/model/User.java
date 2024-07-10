@@ -5,6 +5,7 @@ import com.foodOrder.dto.RestaurantDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
@@ -20,7 +21,14 @@ public class User {
     private Long id;
     private String fullName;
     private String email;
-    private USER_ROLE role;
+
+    private String password;
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    private USER_ROLE role = USER_ROLE.ROLE_CUSTOMER;
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "customer")
