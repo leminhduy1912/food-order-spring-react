@@ -3,12 +3,12 @@ package com.foodOrder.service.impl;
 import com.foodOrder.config.JwtProvider;
 import com.foodOrder.model.User;
 import com.foodOrder.repository.UserRepository;
-import com.foodOrder.service.UserService;
+import com.foodOrder.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements IUserService {
     @Autowired
     private UserRepository userRepository;
     @Autowired

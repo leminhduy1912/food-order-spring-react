@@ -29,7 +29,7 @@ public class User {
         this.password = password;
     }
 
-    private USER_ROLE role = USER_ROLE.ROLE_CUSTOMER;
+    private USER_ROLE role = USER_ROLE.CUSTOMER;
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "customer")

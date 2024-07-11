@@ -1,4 +1,4 @@
-package com.foodOrder.service;
+package com.foodOrder.service.impl;
 
 import com.foodOrder.model.USER_ROLE;
 import com.foodOrder.model.User;
@@ -25,7 +25,7 @@ public class CustomerUserDetailsService implements UserDetailsService {
             throw  new UsernameNotFoundException("User Not Found with email "+username);
         }
         USER_ROLE userRole = user.getRole();
-        if(userRole==null) userRole=USER_ROLE.ROLE_CUSTOMER;
+        if(userRole==null) userRole=USER_ROLE.CUSTOMER;
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(userRole.toString()));
         return new org.springframework.security.core.userdetails.User(user.getEmail(),user.getPassword(),authorities);
