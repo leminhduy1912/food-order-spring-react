@@ -32,7 +32,7 @@ public class AdminCategoryController {
     }
 
     @GetMapping("/category/restaurant/{id}")
-    public ResponseEntity<List<Category>> getCategoryByResraurantId(
+    public ResponseEntity<List<Category>> getCategoryByUserIdAndResraurantId(
             @RequestHeader("Authorization") String jwt) throws Exception {
         try {
             User user = userService.findUserByJwt(jwt);
