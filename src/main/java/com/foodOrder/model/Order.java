@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -37,5 +37,5 @@ public class Order {
     private List<OrderItem> items;
 
     private int totalItem;
-    private int totalPrice;
+    private Long totalPrice;
 }

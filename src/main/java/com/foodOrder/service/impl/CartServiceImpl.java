@@ -101,6 +101,7 @@ public class CartServiceImpl implements ICartService {
         if(cart==null){
             throw new Exception("Cart not found");
         }
+        cart.setTotal(calculateCartItemTotals(cart));
         return cart;
     }
 
