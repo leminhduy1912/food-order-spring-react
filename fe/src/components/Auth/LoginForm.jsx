@@ -99,16 +99,14 @@
 
 import { Box, Button, Modal, TextField, Typography } from "@mui/material";
 import { Field, Formik, Form } from "formik";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getUser, loginUser } from "../State/Authentication/Action";
-import { useEffect } from "react";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const { auth } = useSelector((store) => store);
 
   const handleClose = () => {};
 
