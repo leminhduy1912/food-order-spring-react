@@ -18,9 +18,10 @@ import { api, API_URL } from "../../config/api";
 
 export const registerUser = (reqData) => async (dispatch) => {
   dispatch({ type: REGISTER_REQUEST });
+  console.log("dispatcher register", reqData.userData);
   try {
     const { data } = await axios.post(
-      `${API_URL}/auth/signup`,
+      `${API_URL}/auth/sign-up`,
       reqData.userData
     );
     if (data.jwt) localStorage.setItem("jwt", data.jwt);
@@ -40,14 +41,14 @@ export const loginUser = (reqData) => async (dispatch) => {
   dispatch({ type: LOGIN_REQUEST });
   try {
     const { data } = await axios.post(
-      `${API_URL}/auth/signin`,
+      `${API_URL}/auth/sign-in`,
       reqData.userData
     );
     if (data.jwt) localStorage.setItem("jwt", data.jwt);
     if (data.role == "ROLE_RESTAURANT_OWNER") {
       reqData.navigate("/admin/restaurant");
     } else {
-      reqData.navigate("/");
+      reqData.navigate("/my-profile");
     }
     dispatch({ type: LOGIN_SUCCESS, payload: data.jwt });
     console.log("login success", data);
@@ -58,8 +59,9 @@ export const loginUser = (reqData) => async (dispatch) => {
 };
 export const getUser = (jwt) => async (dispatch) => {
   dispatch({ type: GET_USER_REQUEST });
+  console.log("jwt", jwt);
   try {
-    const { data } = await api.get(`/auth/signin`, {
+    const { data } = await api.get(`api/user/profile`, {
       headers: { Authorization: `Bearer ${jwt}` },
     });
 

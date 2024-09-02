@@ -1,10 +1,10 @@
 import { Box, Modal } from "@mui/material";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import RegisterForm from "./RegisterForm";
 import LoginForm from "./LoginForm";
 
 const Auth = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const location = useLocation();
   const handleClose = () => {};
   const style = {

@@ -1,29 +1,27 @@
-// import {
-//   Box,
-//   Button,
-//   FormControl,
-//   InputLabel,
-//   MenuItem,
-//   Modal,
-//   Select,
-//   TextField,
-//   Typography,
-// } from "@mui/material";
+// import { Box, Button, Modal, TextField, Typography } from "@mui/material";
 // import { Field, Formik, Form } from "formik";
+// import { useDispatch, useSelector } from "react-redux";
 // import { useLocation, useNavigate } from "react-router-dom";
-
-// const initialValues = {
-//   fullName: "",
-//   role: "ROLE_CUSTOMER",
-//   email: "",
-//   password: "",
-// };
+// import { getUser, loginUser } from "../State/Authentication/Action";
+// import { useEffect } from "react";
 
 // const LoginForm = () => {
+//   const dispatch = useDispatch();
 //   const navigate = useNavigate();
 //   const location = useLocation();
 //   const handleClose = () => {};
+//   const { auth } = useSelector((store) => store);
 
+//   // const jwt = localStorage.getItem("jwt");
+//   const handleSubmit = (values) => {
+//     dispatch(loginUser({ userData: values, navigate }));
+//     const jwt = localStorage.getItem("jwt");
+//     dispatch(getUser(jwt));
+//   };
+//   const initialValues = {
+//     email: "",
+//     password: "",
+//   };
 //   const style = {
 //     position: "absolute",
 //     top: "50%",
@@ -36,33 +34,23 @@
 //     boxShadow: 24,
 //     p: 4,
 //   };
-
-//   const handleSubmit = () => {};
-
+//   console.log("modal");
 //   return (
 //     <>
 //       <Modal
 //         open={
-//           location.pathname === "/account/register" ||
-//           location.pathname === "/account/login"
+//           location.pathname == "/account/register" ||
+//           location.pathname == "/account/login"
 //         }
 //         onClose={handleClose}
 //       >
 //         <Box style={style}>
 //           <div>
 //             <Typography variant="h5" className="text-center">
-//               Login
+//               Log In
 //             </Typography>
 //             <Formik onSubmit={handleSubmit} initialValues={initialValues}>
 //               <Form>
-//                 <Field
-//                   as={TextField}
-//                   name="fullName"
-//                   label="Fullname"
-//                   variant="outlined"
-//                   fullWidth
-//                   margin="normal"
-//                 />
 //                 <Field
 //                   as={TextField}
 //                   name="email"
@@ -79,22 +67,6 @@
 //                   fullWidth
 //                   margin="normal"
 //                 />
-//                 <FormControl fullWidth>
-//                   <InputLabel id="demo-simple-select-label">Role</InputLabel>
-//                   <Field
-//                     labelId="demo-simple-select-label"
-//                     as={Select}
-//                     id="demo-simple-select"
-//                     // value={age}
-//                     label="Age"
-//                     // onChange={handleChange}
-//                   >
-//                     <MenuItem value={"ROLE_CUSTOMER"}>Customer</MenuItem>
-//                     <MenuItem value={"ROLE_RESTAURANT_OWNER"}>
-//                       Restaurant Owner
-//                     </MenuItem>
-//                   </Field>
-//                 </FormControl>
 //                 <Button
 //                   className="mt-5"
 //                   fullWidth
@@ -106,14 +78,14 @@
 //               </Form>
 //             </Formik>
 //             <Typography variant="body2" align="center" sx={{ mt: 3 }}>
-//               If have an account already?{" "}
+//               Don't have account ?{" "}
 //               <Button
 //                 size="small"
 //                 onClick={() => {
-//                   navigate("/account/login");
+//                   navigate("/account/register");
 //                 }}
 //               >
-//                 Log in
+//                 Register
 //               </Button>
 //             </Typography>
 //           </div>
@@ -127,17 +99,34 @@
 
 import { Box, Button, Modal, TextField, Typography } from "@mui/material";
 import { Field, Formik, Form } from "formik";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
+import { getUser, loginUser } from "../State/Authentication/Action";
+import { useEffect } from "react";
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+  const { auth } = useSelector((store) => store);
+
   const handleClose = () => {};
-  const handleSubmit = () => {};
+
+  const handleSubmit = async (values) => {
+    await dispatch(loginUser({ userData: values, navigate }));
+
+    const jwt = localStorage.getItem("jwt");
+
+    if (jwt) {
+      dispatch(getUser(jwt));
+    }
+  };
+
   const initialValues = {
     email: "",
     password: "",
   };
+
   const style = {
     position: "absolute",
     top: "50%",
@@ -150,20 +139,20 @@ const LoginForm = () => {
     boxShadow: 24,
     p: 4,
   };
-  console.log("modal");
+
   return (
     <>
       <Modal
         open={
-          location.pathname == "/account/register" ||
-          location.pathname == "/account/login"
+          location.pathname === "/account/register" ||
+          location.pathname === "/account/login"
         }
         onClose={handleClose}
       >
         <Box style={style}>
           <div>
             <Typography variant="h5" className="text-center">
-              Register
+              Log In
             </Typography>
             <Formik onSubmit={handleSubmit} initialValues={initialValues}>
               <Form>

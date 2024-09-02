@@ -10,17 +10,20 @@ import {
   Typography,
 } from "@mui/material";
 import { Field, Formik, Form } from "formik";
+import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
+import { registerUser } from "../State/Authentication/Action";
 
 const initialValues = {
   fullName: "",
-  role: "ROLE_CUSTOMER",
+  role: "CUSTOMER",
   email: "",
   password: "",
 };
 
 const RegisterForm = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const location = useLocation();
   const handleClose = () => {};
 
@@ -37,7 +40,10 @@ const RegisterForm = () => {
     p: 4,
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = (values) => {
+    console.log(values);
+    dispatch(registerUser({ userData: values, navigate }));
+  };
 
   return (
     <>
@@ -86,12 +92,12 @@ const RegisterForm = () => {
                     labelId="demo-simple-select-label"
                     as={Select}
                     id="demo-simple-select"
-                    // value={age}
+                    value={initialValues.role}
                     label="Age"
-                    // onChange={handleChange}
+                    // onChange={initialValues}
                   >
-                    <MenuItem value={"ROLE_CUSTOMER"}>Customer</MenuItem>
-                    <MenuItem value={"ROLE_RESTAURANT_OWNER"}>
+                    <MenuItem value={"CUSTOMER"}>Customer</MenuItem>
+                    <MenuItem value={"RESTAURANT_OWNER"}>
                       Restaurant Owner
                     </MenuItem>
                   </Field>
